@@ -1,0 +1,27 @@
+{
+  "sources": [
+    {"glob": "docs/decisions/*.md", "kind": "decision", "split": "bullet", "exclude": ["**/README.md"]},
+    {"glob": "docs/runbooks/*.md", "kind": "runbook", "split": "heading", "level": 2},
+    {"glob": "docs/**/*.md", "kind": "doc", "split": "file"},
+    {"source": "claude-memory", "kind": "memory"},
+    {"glob": "agent/notes/*.md", "kind": "agent-note", "split": "memory"}
+  ],
+  "exclude": ["**/node_modules/**", "**/CHANGELOG.md"],
+  "synonyms": "recall-synonyms.json",
+  "stopwords": ["team", "project"],
+  "keep_words": ["it"],
+  "top": 3,
+  "max_bytes": 1000,
+  "summary_chars": 160,
+  "min_words": 4,
+  "min_hits": 2,
+  "min_score": 5.0,
+  "recency_floor": 0.85,
+  "recency_days": 365,
+  "kind_weights": {"runbook": 0.9},
+  "hook_skip_kinds": ["memory"],
+  "skip_prefixes": ["/loop"],
+  "summary_headings": ["conclusion", "summary", "decision", "outcome", "tl;dr"],
+  "header": "Possibly relevant project notes (read the note before redoing the work):",
+  "embedding": {"url": "", "model": "", "api_key_env": "", "min_cos": 0.6, "timeout": 1.5, "cache": ".recall-cache"}
+}

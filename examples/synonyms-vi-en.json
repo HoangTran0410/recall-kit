@@ -1,0 +1,20 @@
+{
+  "_comment": "Prompt phrase (any accents, any case) -> words to add to the search. Keys starting with _ are ignored.",
+  "bộ nhớ đệm": "cache",
+  "cơ sở dữ liệu": "database",
+  "hàng đợi": "queue",
+  "thử lại": "retry",
+  "đăng nhập": "login auth",
+  "quyền": "permission",
+  "trợ năng": "accessibility",
+  "thông báo": "notification",
+  "hình nền": "wallpaper",
+  "màn hình chính": "home launcher",
+  "giật": "jank",
+  "chậm": "slow latency",
+  "sao lưu": "backup",
+  "khôi phục": "restore",
+  "triển khai": "deploy release",
+  "kiểm thử": "test",
+  "hiệu năng": "performance perf"
+}

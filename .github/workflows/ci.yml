@@ -1,0 +1,33 @@
+name: ci
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.9", "3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Tests (standard library only)
+        run: python -m unittest discover -s tests -v
+        env:
+          RECALL_SPEED_MS: "250"  # shared runners are slower than a laptop
+      - name: Install and run the console script
+        run: |
+          pip install .
+          recall --version
+          cd "$(mktemp -d)" && recall init && recall stats
+  leaks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: No private paths, addresses or secrets in the tree
+        run: python3 tools/leak_check.py
