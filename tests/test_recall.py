@@ -32,7 +32,7 @@ Intro paragraph, not a note.
 
 ## Rejected
 - Sharding the ledger table by region was rejected 2029-12-01, the join cost doubled.
-  - nested bullet stays inside its parent
+  - nested bullet is a note of its own
 - ~~Use a bloom filter for the ledger lookup~~ replaced by the covering index.
 
 Plain paragraph ends the bullet above.
@@ -138,17 +138,18 @@ class SplitTest(Project):
 
     def test_bullets(self):
         got = [n for n in self.notes if n.kind == "decision"]
-        self.assertEqual([n.id.split(":")[1] for n in got], ["6", "7", "9", "13", "15"])
+        self.assertEqual([n.id.split(":")[1] for n in got], ["6", "7", "9", "13", "14", "15"])
         self.assertEqual(got[0].date, "2030-03-02")
         self.assertEqual(got[1].date, "2030-04-11")
         self.assertIn("quokka", got[1].text)          # continuation line joined
         self.assertEqual((got[1].line, got[1].end), (7, 8))
         self.assertEqual(got[2].date, "")
         self.assertEqual(got[3].date, "2029-12-01")
-        self.assertIn("nested bullet", got[3].text)
-        self.assertNotIn("Plain paragraph", got[4].text)
-        self.assertEqual(got[4].status, "superseded")  # struck-through bullet
-        self.assertNotIn("~~", got[4].summary)
+        self.assertNotIn("nested bullet", got[3].text)   # sub-item = own note, not buried in the parent
+        self.assertIn("nested bullet", got[4].text)
+        self.assertNotIn("Plain paragraph", got[5].text)
+        self.assertEqual(got[5].status, "superseded")  # struck-through bullet
+        self.assertNotIn("~~", got[5].summary)
 
     def test_file(self):
         n = self.by_id("docs/flows/export.md")

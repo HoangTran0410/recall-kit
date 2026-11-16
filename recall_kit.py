@@ -363,8 +363,8 @@ def notes_from_bullets(rel: str, kind: str, text: str) -> list:
             head = clean(ln.lstrip("#"))
             h1 = h1 or head
             cur = None
-        elif ln[:2] in ("- ", "* "):
-            cur = [i, i, ln, ln[2:].strip()]
+        elif ln.lstrip()[:2] in ("- ", "* "):   # nested bullets are notes of their own (a sub-item is often the key fact)
+            cur = [i, i, ln, ln.lstrip()[2:].strip()]
             items.append(cur)
         elif cur and ln[:1] in (" ", "\t") and ln.strip():
             cur[1] = i

@@ -24,7 +24,7 @@ Possibly relevant project notes (read the note before redoing the work):
 1. Install (Python 3.9+):
 
    ```
-   pipx install git+https://github.com/<owner>/recall-kit
+   pipx install git+https://github.com/HoangTran0410/recall-kit
    ```
 
    Or copy one file: put `recall_kit.py` anywhere in your repo (for example `tools/recall_kit.py`)
@@ -101,7 +101,7 @@ A file belongs to the first source that matches it. A full example with every op
 | `split` | One note is | Note id | Good for |
 |---|---|---|---|
 | `file` | The whole file: title = first `# ` heading (else front-matter `title`/`name`, else the file name); summary = first paragraph of a section named Conclusion / Summary / Decision / Outcome / TL;DR, else front-matter `description`, else the first paragraph. Only the first 8,000 characters are read. | `path` | One report or ADR per file |
-| `bullet` | Each top-level `- ` or `* ` line, with its indented continuation lines. Date = first `YYYY-MM-DD` in the bullet line. A bullet that starts with `~~struck text~~` counts as superseded. | `path:line` | Decision logs, "one line per lesson" files |
+| `bullet` | Each `- ` or `* ` line (nested ones too, each its own note), with its indented continuation lines. Date = first `YYYY-MM-DD` in the bullet line. A bullet that starts with `~~struck text~~` counts as superseded. | `path:line` | Decision logs, "one line per lesson" files |
 | `heading` | Each `##` section (or the level you set), including its deeper sub-sections. Date = first `YYYY-MM-DD` in the heading. | `path:line` | Runbooks, FAQs, long design docs |
 
 | `memory` | One agent-memory file: title = front-matter `name`; searchable text = `description` + the first 8 body lines (the **Why:** / **How to apply:** lines) + `metadata.type`. | `path` | Memory notes kept inside the repo |
